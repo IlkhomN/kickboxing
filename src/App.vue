@@ -7,7 +7,7 @@
       >
         <h2>{{ `${timetable.combat_sport_type_id} ${timetable.age_group} ${timetable.sex} ${timetable.weight}` }}</h2>
         <div class="table_wrapper">
-          <div v-show="i >= 8" class="table_row" v-for="(tb, i) in timetable.tournament_brackets" :key="tb.id">
+          <div v-show="i <= 8" class="table_row" v-for="(tb, i) in timetable.tournament_brackets" :key="tb.id">
             <span>{{ tb.start_at }}</span>
             <span>{{ tb.first_fighter && tb.first_fighter.name }}</span>
             <span>vs</span>
@@ -31,41 +31,164 @@
                 </div>
             </div>
         </div>
-        <div v-else-if="reversedTbsGroups.length > 0" class="bracket  disable-image">
-            <div
-              class="column"
-              v-for="tbs in reversedTbsGroups"
-              :key="tbs"
-            >
-                <div
-                  class="match winner-top"
-                  v-for="tb in tbs_groups[tbs]"
-                  :key="tb.id"
-                >
-                    <div class="match-top team">
-                        <span class="image"></span>
-                        <span class="seed"><img v-if="tb.first_fighter" :src="`/flags/${tb.first_fighter.country.code}.svg`"></span>
-                        <span class="name">{{ tb.first_fighter && tb.first_fighter.name || 'Отсутствует' }}</span>
-                        <span class="score">{{ tb.first_fighter && tb.first_fighter.age }}</span>
-                    </div>
-                    <div class="match-bottom team">
-                        <span class="image"></span>
-                        <span class="seed"><img v-if="tb.second_fighter" :src="`/flags/${tb.second_fighter.country.code}.svg`"></span>
-                        <span class="name">{{ tb.second_fighter && tb.second_fighter.name || 'Отсутствует' }}</span>
-                        <span class="score">{{ tb.second_fighter && tb.second_fighter.age }}</span>
-                    </div>
-                    <div class="match-lines">
-                        <div class="line one"></div>
-                        <div class="line two"></div>
-                    </div>
-                    <div class="match-lines alt">
-                        <div class="line one"></div>
-                    </div>
-                </div>
-            </div>
+        <div class="theme__wrapper" v-else-if="reversedTbsGroups.length > 0"  style="    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;">
+          <table v-if="step === 5" style="margin-left: 45px; margin-top: 15px; text-align: left;">
+              <tr>
+                  <td>
+                      Пол:
+                  </td>
+                  <td style="padding-left: 15px;">
+                      <a href="#" @click="(e) => preventSelect(e, 1)">{{ selected.sex === 'male' ? 'Мужской' : 'Женский' }}</a>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      Возраст:
+                  </td>
+                  <td style="padding-left: 15px;">
+                      <a href="#" @click="(e) => preventSelect(e, 2)">{{ selected.age }}</a>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      Направление:
+                  </td>
+                  <td style="padding-left: 15px;">
+                      <a href="#" @click="(e) => preventSelect(e, 3)">{{ selected.type }}</a>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      Весовая категория:
+                  </td>
+                  <td style="padding-left: 15px;">
+                      <a href="#" @click="(e) => preventSelect(e, 4)">{{ selected.weight }}</a>
+                  </td>
+              </tr>
+          </table>
+          <div class="bracket  disable-image">
+              <div
+                class="column"
+                v-for="tbs in reversedTbsGroups"
+                :key="tbs"
+              >
+                  <div
+                    class="match"
+                    :class="{
+                      'winner-top': tb.first_fighter_id && tb.winner_fighter_id === tb.first_fighter_id,
+                      'winner-bottom': tb.second_fighter_id && tb.winner_fighter_id === tb.second_fighter_id,
+                    }"
+                    v-for="tb in tbs_groups[tbs]"
+                    :key="tb.id"
+                  >
+                      <div class="match-top team">
+                          <span class="image"></span>
+                          <span class="seed">
+                            <span
+                              style="margin-right: 5px; text-transform: uppercase;"
+                              v-if="tb.first_fighter"
+                            >
+                              {{tb.first_fighter.country.code}}
+                            </span>
+                            <img v-if="tb.first_fighter" :src="`/flags/${tb.first_fighter.country.code}.svg`">
+                            </span>
+                          <span class="name">{{ tb.first_fighter && tb.first_fighter.name || 'Отсутствует' }}</span>
+                          <span class="score">{{ tb.first_fighter && tb.first_fighter.age }}</span>
+                      </div>
+                      <div class="match-bottom team">
+                          <span class="image"></span>
+                          <span class="seed">
+                            <span
+                              style="margin-right: 5px; text-transform: uppercase;"
+                              v-if="tb.second_fighter"
+                            >
+                              {{tb.second_fighter.country.code}}
+                            </span>
+                            <img v-if="tb.second_fighter" :src="`/flags/${tb.second_fighter.country.code}.svg`">
+                          </span>
+                          <span class="name">{{ tb.second_fighter && tb.second_fighter.name || 'Отсутствует' }}</span>
+                          <span class="score">{{ tb.second_fighter && tb.second_fighter.age }}</span>
+                      </div>
+                      <div class="match-lines">
+                          <div class="line one"></div>
+                          <div class="line two"></div>
+                      </div>
+                      <div class="match-lines alt">
+                          <div class="line one"></div>
+                      </div>
+                  </div>
+              </div>
+              <div class="column">
+                  <div 
+                    class="match"
+                    :class="{
+                      'winner-top': champion.winner_fighter_id,
+                    }"
+                  >
+                      <div class="match-top team">
+                          <span class="image"></span>
+                          <span class="seed">
+                            <span
+                              style="margin-right: 5px; text-transform: uppercase;"
+                              v-if="champion.first_fighter"
+                            >
+                              {{champion.first_fighter.country.code}}
+                            </span>
+                            <img v-if="champion.winner_fighter" :src="`/flags/${champion.winner_fighter.country.code}.svg`">
+                          </span>
+                          <span class="name">{{ champion.winner_fighter && champion.winner_fighter.name || 'Отсутствует' }}</span>
+                          <span class="score">{{ champion.winner_fighter && `${champion.winner_fighter.age} / ${champion.winner_fighter.weight} кг` }}</span>
+                      </div>
+                      <div class="match-lines">
+                          <div class="line one"></div>
+                      </div>
+                      <div class="match-lines alt">
+                          <div class="line one"></div>
+                      </div>
+                  </div>
+              </div>
+          </div>  
         </div>
+        
         <div v-else style="display: flex; width: 100%; height: 80%; justify-content: center; align-items: center; flex-direction: column;">
-            <h1>Не найдено!</h1>
+            <table v-if="step === 5" style="margin-left: 45px; margin-top: 15px; text-align: left;">
+                <tr>
+                    <td>
+                        Пол:
+                    </td>
+                    <td style="padding-left: 15px;">
+                        <a href="#" @click="(e) => preventSelect(e, 1)">{{ selected.sex === 'male' ? 'Мужской' : 'Женский' }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Возраст:
+                    </td>
+                    <td style="padding-left: 15px;">
+                        <a href="#" @click="(e) => preventSelect(e, 2)">{{ selected.age }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Направление:
+                    </td>
+                    <td style="padding-left: 15px;">
+                        <a href="#" @click="(e) => preventSelect(e, 3)">{{ selected.type }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Весовая категория:
+                    </td>
+                    <td style="padding-left: 15px;">
+                        <a href="#" @click="(e) => preventSelect(e, 4)">{{ selected.weight }}</a>
+                    </td>
+                </tr>
+            </table>
+            <h1 style="display: flex; flex: 1; align-items: center;">Не найдено!</h1>
         </div>
     </div>
   </div>
@@ -90,6 +213,9 @@ export default {
       
   },
   computed: {
+      champion() {
+        return this.tbs_groups[1][0]
+      },
       reversedTbsGroups() {
           return Object.keys( this.tbs_groups ).sort( ( a , b ) => b - a);
       },
@@ -113,27 +239,27 @@ export default {
                 title: 'Возрастная группа',
                 variants: [
                     {
-                        title: 'Younger Cadets',
+                        title: 'Younger Cadets (Tatami) (10-12)',
                         value: 'younger-cadets'
                     },
                     {
-                        title: 'Older Cadets',
+                        title: 'Older Cadets (Tatami) (13-15)',
                         value: 'older-cadets'
                     },
                     {
-                        title: 'Juniors (Tatami)',
+                        title: 'Juniors (Tatami) (16-18)',
                         value: 'juniors'
                     },
                     {
-                        title: 'Juniors (Ring)',
+                        title: 'Juniors (Ring) (15-16)',
                         value: 'younger-juniors'
                     },
                     {
-                        title: 'Older Juniors',
+                        title: 'Older Juniors (Ring) (17-18)',
                         value: 'older-juniors'
                     },
                     {
-                        title: 'Seniors',
+                        title: 'Seniors (Ring) (19-40)',
                         value: 'seniors'
                     },
                 ]
@@ -196,6 +322,22 @@ export default {
                                 title: 'до 32',
                                 value: '-32'
                             },
+                            {
+                                title: 'до 37',
+                                value: '-37'
+                            },
+                            {
+                                title: 'до 42',
+                                value: '-42'
+                            },
+                            {
+                                title: 'до 47',
+                                value: '-47'
+                            },
+                            {
+                                title: 'от 47',
+                                value: '47'
+                            },
                         ]
                     }
                 } else {
@@ -209,6 +351,22 @@ export default {
                             {
                                 title: 'до 32',
                                 value: '-32'
+                            },
+                            {
+                                title: 'до 37',
+                                value: '-37'
+                            },
+                            {
+                                title: 'до 42',
+                                value: '-42'
+                            },
+                            {
+                                title: 'до 47',
+                                value: '-47'
+                            },
+                            {
+                                title: 'от 47',
+                                value: '47'
                             },
                         ]
                     }
@@ -226,6 +384,26 @@ export default {
                                 title: 'до 47',
                                 value: '-47'
                             },
+                            {
+                                title: 'до 52',
+                                value: '-52'
+                            },
+                            {
+                                title: 'до 57',
+                                value: '-57'
+                            },
+                            {
+                                title: 'до 63',
+                                value: '-63'
+                            },
+                            {
+                                title: 'до 69',
+                                value: '-69'
+                            },
+                            {
+                                title: 'от 69',
+                                value: '69'
+                            },
                         ]
                     }
                 } else {
@@ -239,6 +417,26 @@ export default {
                             {
                                 title: 'до 46',
                                 value: '-46'
+                            },
+                            {
+                                title: 'до 50',
+                                value: '-50'
+                            },
+                            {
+                                title: 'до 55',
+                                value: '-55'
+                            },
+                            {
+                                title: 'до 60',
+                                value: '-60'
+                            },
+                            {
+                                title: 'до 65',
+                                value: '-65'
+                            },
+                            {
+                                title: 'от 65',
+                                value: '65'
                             },
                         ]
                     }
@@ -256,6 +454,34 @@ export default {
                                 title: 'до 63',
                                 value: '-63'
                             },
+                            {
+                                title: 'до 69',
+                                value: '-69'
+                            },
+                            {
+                                title: 'до 74',
+                                value: '-74'
+                            },
+                            {
+                                title: 'до 79',
+                                value: '-79'
+                            },
+                            {
+                                title: 'до 84',
+                                value: '-84'
+                            },
+                            {
+                                title: 'до 89',
+                                value: '-89'
+                            },
+                            {
+                                title: 'до 94',
+                                value: '-94'
+                            },
+                            {
+                                title: 'от 94',
+                                value: '94'
+                            },
                         ]
                     }
                 } else {
@@ -269,6 +495,22 @@ export default {
                             {
                                 title: 'до 55',
                                 value: '-55'
+                            },
+                            {
+                                title: 'до 60',
+                                value: '-60'
+                            },
+                            {
+                                title: 'до 65',
+                                value: '-65'
+                            },
+                            {
+                                title: 'до 70',
+                                value: '-70'
+                            },
+                            {
+                                title: 'от 70',
+                                value: '70'
                             },
                         ]
                     }
@@ -286,6 +528,50 @@ export default {
                                 title: 'до 45',
                                 value: '-45'
                             },
+                            {
+                                title: 'до 48',
+                                value: '-48'
+                            },
+                            {
+                                title: 'до 51',
+                                value: '-51'
+                            },
+                            {
+                                title: 'до 54',
+                                value: '-54'
+                            },
+                            {
+                                title: 'до 57',
+                                value: '-57'
+                            },
+                            {
+                                title: 'до 60',
+                                value: '-60'
+                            },
+                            {
+                                title: 'до 63.5',
+                                value: '-63.5'
+                            },
+                            {
+                                title: 'до 67',
+                                value: '-67'
+                            },
+                            {
+                                title: 'до 71',
+                                value: '-71'
+                            },
+                            {
+                                title: 'до 75',
+                                value: '-75'
+                            },
+                            {
+                                title: 'до 81',
+                                value: '-81'
+                            },
+                            {
+                                title: 'от 81',
+                                value: '81'
+                            },
                         ]
                     }
                 } else {
@@ -299,6 +585,30 @@ export default {
                             {
                                 title: 'до 40',
                                 value: '-40'
+                            },
+                            {
+                                title: 'до 44',
+                                value: '-44'
+                            },
+                            {
+                                title: 'до 48',
+                                value: '-48'
+                            },
+                            {
+                                title: 'до 52',
+                                value: '-52'
+                            },
+                            {
+                                title: 'до 56',
+                                value: '-56'
+                            },
+                            {
+                                title: 'до 60',
+                                value: '-60'
+                            },
+                            {
+                                title: 'от 60',
+                                value: '60'
                             },
                         ]
                     }
@@ -316,6 +626,46 @@ export default {
                                 title: 'до 54',
                                 value: '-54'
                             },
+                            {
+                                title: 'до 57',
+                                value: '-57'
+                            },
+                            {
+                                title: 'до 60',
+                                value: '-60'
+                            },
+                            {
+                                title: 'до 63.5',
+                                value: '-63.5'
+                            },
+                            {
+                                title: 'до 67',
+                                value: '-67'
+                            },
+                            {
+                                title: 'до 71',
+                                value: '-71'
+                            },
+                            {
+                                title: 'до 75',
+                                value: '-75'
+                            },
+                            {
+                                title: 'до 81',
+                                value: '-81'
+                            },
+                            {
+                                title: 'до 86',
+                                value: '-86'
+                            },
+                            {
+                                title: 'до 91',
+                                value: '-91'
+                            },
+                            {
+                                title: 'от 91',
+                                value: '91'
+                            },
                         ]
                     }
                 } else {
@@ -329,6 +679,26 @@ export default {
                             {
                                 title: 'до 52',
                                 value: '-52'
+                            },
+                            {
+                                title: 'до 56',
+                                value: '-56'
+                            },
+                            {
+                                title: 'до 60',
+                                value: '-60'
+                            },
+                            {
+                                title: 'до 65',
+                                value: '-65'
+                            },
+                            {
+                                title: 'до 70',
+                                value: '-70'
+                            },
+                            {
+                                title: 'от 70',
+                                value: '70'
                             },
                         ]
                     }
@@ -346,6 +716,46 @@ export default {
                                 title: 'до 54',
                                 value: '-54'
                             },
+                            {
+                                title: 'до 57',
+                                value: '-57'
+                            },
+                            {
+                                title: 'до 60',
+                                value: '-60'
+                            },
+                            {
+                                title: 'до 63.5',
+                                value: '-63.5'
+                            },
+                            {
+                                title: 'до 67',
+                                value: '-67'
+                            },
+                            {
+                                title: 'до 71',
+                                value: '-71'
+                            },
+                            {
+                                title: 'до 75',
+                                value: '-75'
+                            },
+                            {
+                                title: 'до 81',
+                                value: '-81'
+                            },
+                            {
+                                title: 'до 86',
+                                value: '-86'
+                            },
+                            {
+                                title: 'до 91',
+                                value: '-91'
+                            },
+                            {
+                                title: 'от 91',
+                                value: '91'
+                            },
                         ]
                     }
                 } else {
@@ -360,33 +770,49 @@ export default {
                                 title: 'до 52',
                                 value: '-52'
                             },
+                            {
+                                title: 'до 56',
+                                value: '-56'
+                            },
+                            {
+                                title: 'до 60',
+                                value: '-60'
+                            },
+                            {
+                                title: 'до 65',
+                                value: '-65'
+                            },
+                            {
+                                title: 'до 70',
+                                value: '-70'
+                            },
+                            {
+                                title: 'от 70',
+                                value: '70'
+                            },
                         ]
                     }
                 }
             } else {
                 return {
-                    title: 'Весовая категория',
+                    title: 'Неизвестная ошибка',
                     variants: [
-                        {
-                            title: this.selected.sex + this.selected.age + this.selected.type,
-                            value: '-51'
-                        },
-                        {
-                            title: 'до 54',
-                            value: '-54'
-                        },
                     ]
                 }
             }
         } else {
             return []
         }
-      }
+      },
   },
   mounted() {
     this.timetable()
   },
   methods: {
+      preventSelect(e, step) {
+        e.preventDefault();
+        this.step = step
+      },
       timetable() {
         axios.get(`http://api.kickboxing.beget.tech/api/tournament-bracket-groups/main`)
           .then(({ data }) => {
@@ -424,6 +850,10 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  margin: 0;
+  height: auto;
+}
 .timetable {
     width: 100%;
     height: 100vh;
@@ -473,6 +903,23 @@ h2 {
 
     &.router-link-exact-active {
       color: #42b983;
+    }
+  }
+}
+
+.theme {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.params-selector {
+  flex: 1;
+  .params-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    .param {
+      margin: 0 15px;
     }
   }
 }
