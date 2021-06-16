@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <div class="timetable">
+    <!-- <div class="timetable">
       <div class="table"
         v-for="(timetable, key) in timetables"
         :key="key"
       >
-        <!-- <h2>{{ `${timetable.combat_sport_type_id} ${timetable.age_group} ${timetable.sex} ${timetable.weight}` }}</h2> -->
+        <h2>{{ `${timetable.combat_sport_type_id} ${timetable.age_group} ${timetable.sex} ${timetable.weight}` }}</h2>
         <div class="table_wrapper">
           <div v-show="moment(tb.start_at).format('DD') === moment().format('DD')" class="table_row" v-for="tb in timetable" :key="tb.id">
             <span>{{ moment(tb.start_at).format('HH:mm') }}</span>
@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="theme theme-light" id="tbs">
         <div v-if="step !== 5" class="params-selector" style="display: flex; width: 100%; height: 100%; justify-content: center; align-items: center; flex-direction: column;">
             <h1>{{ paramsSelector.title }}</h1>
@@ -816,18 +816,18 @@ export default {
         this.step = step
       },
       timetable() {
-        axios.get(`http://kickboxing.loc/api/time-tables/ring-3`)
+        axios.get(`http://api.kickboxing.beget.tech/api/time-tables/ring-3`)
           .then(({ data }) => {
               this.timetables = data
           })
       },
       setWinner(tb, winnerId) {
           console.log(tb, winnerId)
-        axios.post(`http://kickboxing.loc/api/tournament-brackets/${tb.id}/winner`, {
+        axios.post(`http://api.kickboxing.beget.tech/api/tournament-brackets/${tb.id}/winner`, {
             winner_fighter_id: winnerId
         })
             .then(() => {
-                axios.get(`http://kickboxing.loc/api/tournament-bracket-groups/${tb.tournament_bracket_group_id}/tournament-brackets`)
+                axios.get(`http://api.kickboxing.beget.tech/api/tournament-bracket-groups/${tb.tournament_bracket_group_id}/tournament-brackets`)
                 .then(({ data }) => {
                     this.tbs_groups = data
                 })
@@ -838,7 +838,7 @@ export default {
         this.selected[steps[this.step-1]] = value
 
         if(this.step === 4) {
-            axios.get(`http://kickboxing.loc/api/tournament-bracket-groups/search`, {
+            axios.get(`http://api.kickboxing.beget.tech/api/tournament-bracket-groups/search`, {
                 params: this.selected
             })
             .then(({ data }) => {
