@@ -403,37 +403,40 @@ table tfoot .links a{
   border-radius: 5px;
 }
 
-.theme {
-  height: auto;
-  min-height: 100vh;
-  overflow: auto;
-}
+@media (max-width: 768px) {
+  .theme {
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+  }
 
-.param {
-  white-space: nowrap;
-  padding: 10px;
-}
+  .param {
+      white-space: nowrap;
+      padding: 10px;
+  }
 
-.params-wrapper {
-  flex-wrap: wrap;
-  justify-content: center;
-}
+  .params-wrapper {
+      flex-wrap: wrap;
+      justify-content: center;
+  }
 
-h1 {
-  font-size: 24px;
-}
+  h1 {
+      font-size: 24px;
+  }
 
-table {
-  width: 100%;
-  margin: 0!important;
-}
+  table {
+      width: 100%;
+      margin: 0!important;
+  }
 
-table * {
-  font-size: 14px!important;
+  table * {
+      font-size: 14px!important;
+  }
 }
 
 .bracket {
   overflow: auto;
   max-width: 100%;
   width: 100%;
+  margin-left: 40px;
 }
