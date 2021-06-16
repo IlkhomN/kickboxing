@@ -2,16 +2,16 @@
   <div id="app">
     <div class="timetable">
       <div class="table"
-        v-for="timetable in timetables"
-        :key="timetable.id"
+        v-for="(timetable, key) in timetables"
+        :key="key"
       >
-        <h2>{{ `${timetable.combat_sport_type_id} ${timetable.age_group} ${timetable.sex} ${timetable.weight}` }}</h2>
+        <!-- <h2>{{ `${timetable.combat_sport_type_id} ${timetable.age_group} ${timetable.sex} ${timetable.weight}` }}</h2> -->
         <div class="table_wrapper">
-          <div v-show="i <= 8" class="table_row" v-for="(tb, i) in timetable.tournament_brackets" :key="tb.id">
-            <span>{{ tb.start_at }}</span>
-            <span>{{ tb.first_fighter && tb.first_fighter.name }}</span>
+          <div v-show="moment(tb.start_at).format('DD') === moment().format('DD')" class="table_row" v-for="tb in timetable" :key="tb.id">
+            <span>{{ moment(tb.start_at).format('HH:mm') }}</span>
+            <span>{{ tb.bracket.first_fighter && tb.bracket.first_fighter.name }}</span>
             <span>vs</span>
-            <span>{{ tb.second_fighter && tb.second_fighter.name }}</span>
+            <span>{{ tb.bracket.second_fighter && tb.bracket.second_fighter.name }}</span>
           </div>
         </div>
       </div>
@@ -196,6 +196,7 @@
 
 <script>
 import axios from 'axios'
+import moment from 'moment'
 import './assets/admin/style.css'
 export default {
   data() {
@@ -208,7 +209,8 @@ export default {
           type: null,
           weight: null
         },
-        timetables: []
+        timetables: [],
+        moment
       }
       
   },
@@ -814,18 +816,18 @@ export default {
         this.step = step
       },
       timetable() {
-        axios.get(`http://api.kickboxing.beget.tech/api/tournament-bracket-groups/main`)
+        axios.get(`http://kickboxing.loc/api/time-tables/ring-3`)
           .then(({ data }) => {
               this.timetables = data
           })
       },
       setWinner(tb, winnerId) {
           console.log(tb, winnerId)
-        axios.post(`http://api.kickboxing.beget.tech/api/tournament-brackets/${tb.id}/winner`, {
+        axios.post(`http://kickboxing.loc/api/tournament-brackets/${tb.id}/winner`, {
             winner_fighter_id: winnerId
         })
             .then(() => {
-                axios.get(`http://api.kickboxing.beget.tech/api/tournament-bracket-groups/${tb.tournament_bracket_group_id}/tournament-brackets`)
+                axios.get(`http://kickboxing.loc/api/tournament-bracket-groups/${tb.tournament_bracket_group_id}/tournament-brackets`)
                 .then(({ data }) => {
                     this.tbs_groups = data
                 })
@@ -836,7 +838,7 @@ export default {
         this.selected[steps[this.step-1]] = value
 
         if(this.step === 4) {
-            axios.get(`http://api.kickboxing.beget.tech/api/tournament-bracket-groups/search`, {
+            axios.get(`http://kickboxing.loc/api/tournament-bracket-groups/search`, {
                 params: this.selected
             })
             .then(({ data }) => {
@@ -859,6 +861,10 @@ body {
     height: 100vh;
     display: flex;
     background-color: #DAD2D8;
+    overflow: auto;
+    .table {
+        flex: 1 0 33%;
+    }
 }
 
 .table {
