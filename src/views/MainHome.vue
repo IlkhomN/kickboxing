@@ -52,6 +52,19 @@
                       <a href="#" @click="(e) => preventSelect(e, 4)">{{ selected.weight }}</a>
                   </td>
               </tr>
+              <tr>
+                  <td>
+                      Действия:
+                  </td>
+                  <td style="padding-left: 15px;">
+                      <router-link :to="{ name: 'brackets', params: {
+                        sex: selected.sex,
+                        age: selected.age,
+                        type: selected.type,
+                        weight: selected.weight,
+                      } }">Перейти</router-link>
+                  </td>
+              </tr>
           </table>
           <div class="bracket  disable-image">
               <div
@@ -174,6 +187,22 @@
             </table>
             <h1 style="display: flex; flex: 1; align-items: center;">Не найдено!</h1>
         </div>
+    </div>
+    <div class="tts">
+      <h1>Расписание</h1>
+      <div class="tts_wrapper">
+        <router-link :to="{ name: 'time-tables', params: { ring: 'tatami-1' } }">Татами 1</router-link>
+        <br>
+        <router-link :to="{ name: 'time-tables', params: { ring: 'tatami-2' } }">Татами 2</router-link>
+        <br>
+        <router-link :to="{ name: 'time-tables', params: { ring: 'tatami-3' } }">Татами 3</router-link>
+        <br>
+        <br>
+        <br>
+        <router-link :to="{ name: 'time-tables', params: { ring: 'ring-1' } }">Ринг 1</router-link>
+        <br>
+        <router-link :to="{ name: 'time-tables', params: { ring: 'ring-2' } }">Ринг 2</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -792,6 +821,7 @@ export default {
       },
   },
   mounted() {
+    this.timetable()
     setInterval(() => {
         if(this.selected.weight) {
             axios.get(`http://api.kickboxing.beget.tech/api/tournament-bracket-groups/search`, {
@@ -801,12 +831,18 @@ export default {
                 this.tbs_groups = data
             })
         }
-    }, 2000);
+    }, 10000);
   },
   methods: {
       preventSelect(e, step) {
         e.preventDefault();
         this.step = step
+      },
+      timetable() {
+        axios.get(`http://api.kickboxing.beget.tech/api/time-tables/ring-3`)
+          .then(({ data }) => {
+              this.timetables = data
+          })
       },
       setWinner(tb, winnerId) {
           console.log(tb, winnerId)
@@ -843,6 +879,41 @@ body {
   margin: 0;
   height: auto;
 }
+.timetable {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background-color: #DAD2D8;
+    overflow: auto;
+    .table {
+        flex: 1 0 33%;
+    }
+}
+
+.table {
+    width: 25%;
+    background: #143642;
+    padding: 10px;
+    border-right: 1px solid #0F8B8D;
+}
+
+.table_wrapper {
+
+}
+
+h2 {
+  color: #fff;
+}
+
+.table_row {
+  background-color: #0F8B8D;
+  display: flex;
+  padding: 10px 20px;
+  justify-content: space-between;
+  border-radius: 5px;
+  color: #fff;
+  margin-bottom: 10px;
+}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -868,7 +939,7 @@ body {
 .theme {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+//   height: 100vh;
 }
 .params-selector {
   flex: 1;
@@ -878,6 +949,26 @@ body {
     align-items: center;
     .param {
       margin: 0 15px;
+    }
+  }
+}
+
+.tts {
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 90px;
+  text-align: center;
+  h1 {
+    text-align: center;
+  }
+  a {
+    display: block;
+    font-size: 30px;
+    text-transform: uppercase;
+    color: #000;
+    text-decoration: none;
+    &:hover {
+      color: #143642;
     }
   }
 }

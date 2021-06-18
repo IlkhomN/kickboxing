@@ -14,7 +14,7 @@
             <th>Бойец</th>
           </thead>
           <tbody>
-            <template v-for="(tb, i) in timetables">
+            <template v-for="(tb, i) in timetablesInner">
               <tr class="header" :class="[`group-${tb.group.id}`]" v-if="i == 0 || timetables[i-1].group.id !== tb.group.id" :key="tb.id">
                 <td colspan="4">{{ `${groupTitle(tb)}` }}</td>
               </tr>
@@ -62,10 +62,10 @@ export default {
   computed: {
     timetablesInner() {
       return this.timetables.filter((
-        // timetable
+        timetable
         ) => {
-        // return timetable.group.combat_sport_type_id === 2 && timetable.final === 16
-        return true
+        return timetable.group.combat_sport_type_id === 1 && timetable.final === 4
+        // return true
       }).sort((a,b) => {
         if(a.group.weight < b.group.weight) {
           return 1
