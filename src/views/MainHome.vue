@@ -191,17 +191,47 @@
     <div class="tts">
       <h1>Расписание</h1>
       <div class="tts_wrapper">
-        <router-link :to="{ name: 'time-tables', params: { ring: 'tatami-1' } }">Татами 1</router-link>
-        <br>
-        <router-link :to="{ name: 'time-tables', params: { ring: 'tatami-2' } }">Татами 2</router-link>
-        <br>
-        <router-link :to="{ name: 'time-tables', params: { ring: 'tatami-3' } }">Татами 3</router-link>
-        <br>
-        <br>
-        <br>
-        <router-link :to="{ name: 'time-tables', params: { ring: 'ring-1' } }">Ринг 1</router-link>
-        <br>
-        <router-link :to="{ name: 'time-tables', params: { ring: 'ring-2' } }">Ринг 2</router-link>
+        <h2>Татами A</h2>
+        <h3>Пол: Мужской</h3>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-1/male/kick-light">Kick Light</a>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-1/male/light-contact">Light Contact</a>
+        <h3>Пол: Женский</h3>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-1/famale/kick-light">Kick Light</a>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-1/famale/light-contact">Light Contact</a>
+
+        <h2>Татами B</h2>
+        <h3>Пол: Мужской</h3>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-2/male/kick-light">Kick Light</a>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-2/male/light-contact">Light Contact</a>
+        <h3>Пол: Женский</h3>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-2/famale/kick-light">Kick Light</a>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-2/famale/light-contact">Light Contact</a>
+
+      <h2>Татами C</h2>
+        <h3>Пол: Мужской</h3>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-3/male/kick-light">Kick Light</a>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-3/male/light-contact">Light Contact</a>
+        <h3>Пол: Женский</h3>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-3/famale/kick-light">Kick Light</a>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-3/famale/light-contact">Light Contact</a>
+
+        <h2>Ринг A</h2>
+        <h3>Пол: Мужской</h3>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-1/male/full-contact">Full Contact</a>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-1/male/low-kick">Low Kick</a>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-1/male/k-1">K-1</a>
+        <h3>Пол: Женский</h3>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-1/famale/full-contact">Full Contact</a>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-1/famale/low-kick">Low Kick</a>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-1/famale/k-1">K-1</a>
+
+        <h2>Ринг B</h2>
+        <h3>Пол: Мужской</h3>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-2/male/full-contact">Full Contact</a>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-2/male/low-kick">Low Kick</a>
+        <h3>Пол: Женский</h3>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-2/famale/full-contact">Full Contact</a>
+        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-2/famale/low-kick">Low Kick</a>
       </div>
     </div>
   </div>
@@ -961,9 +991,13 @@ h2 {
   h1 {
     text-align: center;
   }
+  h2 {
+      color: #000;
+      margin-top: 90px;
+  }
   a {
     display: block;
-    font-size: 30px;
+    font-size: 16px;
     text-transform: uppercase;
     color: #000;
     text-decoration: none;
