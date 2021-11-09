@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     timetable() {
-      axios.get(`http://api.kickboxing.beget.tech/api/time-tables/${this.$route.params.ring}`)
+      axios.get(`https://wako-api.interactive-labs.ru/api/time-tables/${this.$route.params.ring}`)
         .then(({ data }) => {
             this.timetables = data
         })

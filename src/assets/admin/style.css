@@ -350,7 +350,6 @@ footer {
 
 table {
   border: 4px solid #555555;
-  background-color: #555555;
   width: 400px;
   text-align: center;
   border-collapse: collapse;
@@ -358,11 +357,36 @@ table {
 table td, table th {
   border: 1px solid #398AA4;
   padding: 10px 15px;
-  color: #fff;
+  color: #000;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.name {
+  white-space: nowrap;
+}
+
+.seed {
+  white-space: nowrap;
+}
+
+.match {
+  max-width: 335px;
+}
+
+.match {
+  font-weight: 600;
+}
+
+.sign-place * {
+  font-size: 20px;
+  font-weight: 600;
 }
 
 table td a {
-  color: #fff;
+  color: #000;
+  font-size: 20px;
+  font-weight: 600;
 
 }
 table tbody td {
@@ -371,11 +395,11 @@ table tbody td {
   color: #FFFFFF;
 }
 table td:nth-child(even) {
-  background: #398AA4;
+  /* background: #398AA4; */
   border: 1px solid #555555;
 }
 table thead {
-  background: #398AA4;
+  /* background: #398AA4; */
   border-bottom: 10px solid #398AA4;
 }
 table thead th {

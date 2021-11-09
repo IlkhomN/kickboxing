@@ -191,47 +191,12 @@
     <div class="tts">
       <h1>Расписание</h1>
       <div class="tts_wrapper">
-        <h2>Татами A</h2>
-        <h3>Пол: Мужской</h3>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-1/male/kick-light">Kick Light</a>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-1/male/light-contact">Light Contact</a>
-        <h3>Пол: Женский</h3>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-1/famale/kick-light">Kick Light</a>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-1/famale/light-contact">Light Contact</a>
+        <a target="_blank" href="https://wako-api.interactive-labs.ru/time-tables/tatami-1"><h2>Татами А</h2></a>
+        <a target="_blank" href="https://wako-api.interactive-labs.ru/time-tables/tatami-2"><h2>Татами B</h2></a>
 
-        <h2>Татами B</h2>
-        <h3>Пол: Мужской</h3>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-2/male/kick-light">Kick Light</a>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-2/male/light-contact">Light Contact</a>
-        <h3>Пол: Женский</h3>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-2/famale/kick-light">Kick Light</a>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-2/famale/light-contact">Light Contact</a>
+        <a target="_blank" href="https://wako-api.interactive-labs.ru/time-tables/tatami-3"><h2>Татами С</h2></a>
+        <a target="_blank" href="https://wako-api.interactive-labs.ru/time-tables/tatami-4"><h2>Татами D</h2></a>
 
-      <h2>Татами C</h2>
-        <h3>Пол: Мужской</h3>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-3/male/kick-light">Kick Light</a>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-3/male/light-contact">Light Contact</a>
-        <h3>Пол: Женский</h3>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-3/famale/kick-light">Kick Light</a>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/tatami-3/famale/light-contact">Light Contact</a>
-
-        <h2>Ринг A</h2>
-        <h3>Пол: Мужской</h3>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-1/male/full-contact">Full Contact</a>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-1/male/low-kick">Low Kick</a>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-1/male/k-1">K-1</a>
-        <h3>Пол: Женский</h3>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-1/famale/full-contact">Full Contact</a>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-1/famale/low-kick">Low Kick</a>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-1/famale/k-1">K-1</a>
-
-        <h2>Ринг B</h2>
-        <h3>Пол: Мужской</h3>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-2/male/full-contact">Full Contact</a>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-2/male/low-kick">Low Kick</a>
-        <h3>Пол: Женский</h3>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-2/famale/full-contact">Full Contact</a>
-        <a target="_blank" href="http://api.kickboxing.beget.tech/time-tables/ring-2/famale/low-kick">Low Kick</a>
       </div>
     </div>
   </div>
@@ -266,46 +231,34 @@ export default {
       },
       paramsSelector() {
         if(this.step === 1) {
-            return {
-                title: 'Пол',
-                variants: [
-                    {
-                        title: 'Мужской',
-                        value: 'male'
-                    },
-                    {
-                        title: 'Женский',
-                        value: 'female'
-                    },
-                ]
-            }
+                    return {
+                        title: 'Пол',
+                        variants: [
+                            {
+                                title: 'Мужской',
+                                value: 'male'
+                            },
+                            {
+                                title: 'Женский',
+                                value: 'female'
+                            },
+                        ]
+                    }
         } else if(this.step === 2) {
             return {
                 title: 'Возрастная группа',
                 variants: [
                     {
-                        title: 'Younger Cadets (Tatami) (10-12)',
+                        title: 'Younger Cadets (7-8)',
                         value: 'younger-cadets'
                     },
                     {
-                        title: 'Older Cadets (Tatami) (13-15)',
+                        title: 'Older Cadets (9-10)',
                         value: 'older-cadets'
                     },
                     {
-                        title: 'Juniors (Tatami) (16-18)',
+                        title: 'Juniors (11-12)',
                         value: 'juniors'
-                    },
-                    {
-                        title: 'Juniors (Ring) (15-16)',
-                        value: 'younger-juniors'
-                    },
-                    {
-                        title: 'Older Juniors (Ring) (17-18)',
-                        value: 'older-juniors'
-                    },
-                    {
-                        title: 'Seniors (Ring) (19-40)',
-                        value: 'seniors'
                     },
                 ]
             }
@@ -360,28 +313,32 @@ export default {
                         title: 'Весовая категория',
                         variants: [
                             {
-                                title: 'до 28',
-                                value: '-28'
+                                title: 'до 21',
+                                value: '-21'
                             },
                             {
-                                title: 'до 32',
-                                value: '-32'
+                                title: 'до 24',
+                                value: '-24'
                             },
                             {
-                                title: 'до 37',
-                                value: '-37'
+                                title: 'до 27',
+                                value: '-27'
                             },
                             {
-                                title: 'до 42',
-                                value: '-42'
+                                title: 'до 30',
+                                value: '-30'
                             },
                             {
-                                title: 'до 47',
-                                value: '-47'
+                                title: 'до 33',
+                                value: '-33'
                             },
                             {
-                                title: 'от 47',
-                                value: '47'
+                                title: 'до 36',
+                                value: '-36'
+                            },
+                            {
+                                title: 'от 36',
+                                value: '36'
                             },
                         ]
                     }
@@ -390,28 +347,16 @@ export default {
                         title: 'Весовая категория',
                         variants: [
                             {
-                                title: 'до 28',
-                                value: '-28'
+                                title: 'до 24',
+                                value: '-24'
                             },
                             {
-                                title: 'до 32',
-                                value: '-32'
+                                title: 'до 27',
+                                value: '-27'
                             },
                             {
-                                title: 'до 37',
-                                value: '-37'
-                            },
-                            {
-                                title: 'до 42',
-                                value: '-42'
-                            },
-                            {
-                                title: 'до 47',
-                                value: '-47'
-                            },
-                            {
-                                title: 'от 47',
-                                value: '47'
+                                title: 'до 33',
+                                value: '-33'
                             },
                         ]
                     }
@@ -422,32 +367,44 @@ export default {
                         title: 'Весовая категория',
                         variants: [
                             {
+                                title: 'до 24',
+                                value: '-24'
+                            },
+                            {
+                                title: 'до 27',
+                                value: '-27'
+                            },
+                            {
+                                title: 'до 30',
+                                value: '-30'
+                            },
+                            {
+                                title: 'до 33',
+                                value: '-33'
+                            },
+                            {
+                                title: 'до 36',
+                                value: '-36'
+                            },
+                            {
+                                title: 'до 39',
+                                value: '-39'
+                            },
+                            {
                                 title: 'до 42',
                                 value: '-42'
                             },
                             {
-                                title: 'до 47',
-                                value: '-47'
+                                title: 'до 45',
+                                value: '-45'
                             },
                             {
-                                title: 'до 52',
-                                value: '-52'
+                                title: 'до 48',
+                                value: '-48'
                             },
                             {
-                                title: 'до 57',
-                                value: '-57'
-                            },
-                            {
-                                title: 'до 63',
-                                value: '-63'
-                            },
-                            {
-                                title: 'до 69',
-                                value: '-69'
-                            },
-                            {
-                                title: 'от 69',
-                                value: '69'
+                                title: 'от 48',
+                                value: '48'
                             },
                         ]
                     }
@@ -456,32 +413,24 @@ export default {
                         title: 'Весовая категория',
                         variants: [
                             {
-                                title: 'до 42',
-                                value: '-42'
+                                title: 'до 24',
+                                value: '-24'
                             },
                             {
-                                title: 'до 46',
-                                value: '-46'
+                                title: 'до 27',
+                                value: '-27'
                             },
                             {
-                                title: 'до 50',
-                                value: '-50'
+                                title: 'до 30',
+                                value: '-30'
                             },
                             {
-                                title: 'до 55',
-                                value: '-55'
+                                title: 'до 33',
+                                value: '-33'
                             },
                             {
-                                title: 'до 60',
-                                value: '-60'
-                            },
-                            {
-                                title: 'до 65',
-                                value: '-65'
-                            },
-                            {
-                                title: 'от 65',
-                                value: '65'
+                                title: 'до 36',
+                                value: '-36'
                             },
                         ]
                     }
@@ -492,40 +441,40 @@ export default {
                         title: 'Весовая категория',
                         variants: [
                             {
-                                title: 'до 57',
-                                value: '-57'
+                                title: 'до 30',
+                                value: '-30'
                             },
                             {
-                                title: 'до 63',
-                                value: '-63'
+                                title: 'до 33',
+                                value: '-33'
                             },
                             {
-                                title: 'до 69',
-                                value: '-69'
+                                title: 'до 36',
+                                value: '-36'
                             },
                             {
-                                title: 'до 74',
-                                value: '-74'
+                                title: 'до 39',
+                                value: '-39'
                             },
                             {
-                                title: 'до 79',
-                                value: '-79'
+                                title: 'до 42',
+                                value: '-42'
                             },
                             {
-                                title: 'до 84',
-                                value: '-84'
+                                title: 'до 45',
+                                value: '-45'
                             },
                             {
-                                title: 'до 89',
-                                value: '-89'
+                                title: 'до 48',
+                                value: '-48'
                             },
                             {
-                                title: 'до 94',
-                                value: '-94'
+                                title: 'до 51',
+                                value: '-51'
                             },
                             {
-                                title: 'от 94',
-                                value: '94'
+                                title: 'от 51',
+                                value: '51'
                             },
                         ]
                     }
@@ -534,28 +483,28 @@ export default {
                         title: 'Весовая категория',
                         variants: [
                             {
-                                title: 'до 50',
-                                value: '-50'
+                                title: 'до 30',
+                                value: '-30'
                             },
                             {
-                                title: 'до 55',
-                                value: '-55'
+                                title: 'до 33',
+                                value: '-33'
                             },
                             {
-                                title: 'до 60',
-                                value: '-60'
+                                title: 'до 36',
+                                value: '-36'
                             },
                             {
-                                title: 'до 65',
-                                value: '-65'
+                                title: 'до 39',
+                                value: '-39'
                             },
                             {
-                                title: 'до 70',
-                                value: '-70'
+                                title: 'до 45',
+                                value: '-45'
                             },
                             {
-                                title: 'от 70',
-                                value: '70'
+                                title: 'от 45',
+                                value: '45'
                             },
                         ]
                     }
@@ -854,7 +803,7 @@ export default {
     this.timetable()
     setInterval(() => {
         if(this.selected.weight) {
-            axios.get(`http://api.kickboxing.beget.tech/api/tournament-bracket-groups/search`, {
+            axios.get(`https://wako-api.interactive-labs.ru/api/tournament-bracket-groups/search`, {
                 params: this.selected
             })
             .then(({ data }) => {
@@ -869,18 +818,18 @@ export default {
         this.step = step
       },
       timetable() {
-        axios.get(`http://api.kickboxing.beget.tech/api/time-tables/ring-3`)
+        axios.get(`https://wako-api.interactive-labs.ru/api/time-tables/ring-3`)
           .then(({ data }) => {
               this.timetables = data
           })
       },
       setWinner(tb, winnerId) {
           console.log(tb, winnerId)
-        axios.post(`http://api.kickboxing.beget.tech/api/tournament-brackets/${tb.id}/winner`, {
+        axios.post(`https://wako-api.interactive-labs.ru/api/tournament-brackets/${tb.id}/winner`, {
             winner_fighter_id: winnerId
         })
             .then(() => {
-                axios.get(`http://api.kickboxing.beget.tech/api/tournament-bracket-groups/${tb.tournament_bracket_group_id}/tournament-brackets`)
+                axios.get(`https://wako-api.interactive-labs.ru/api/tournament-bracket-groups/${tb.tournament_bracket_group_id}/tournament-brackets`)
                 .then(({ data }) => {
                     this.tbs_groups = data
                 })
@@ -891,7 +840,7 @@ export default {
         this.selected[steps[this.step-1]] = value
 
         if(this.step === 4) {
-            axios.get(`http://api.kickboxing.beget.tech/api/tournament-bracket-groups/search`, {
+            axios.get(`https://wako-api.interactive-labs.ru/api/tournament-bracket-groups/search`, {
                 params: this.selected
             })
             .then(({ data }) => {
