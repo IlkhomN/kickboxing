@@ -22,9 +22,9 @@
               <tr :key="tb.id">
                 <td>{{ i+1 }}</td>
                 <td>{{ tb.start_at }}</td>
-                <td>{{ tb.bracket.first_fighter && `${tb.bracket.first_fighter.city} -  ${tb.bracket.first_fighter.name}` }}</td>
+                <td>{{ tb.bracket.first_fighter && `${tb.bracket.first_fighter.city} "${tb.bracket.first_fighter.club}" -  ${tb.bracket.first_fighter.name}` }}</td>
                 <td>vs</td>
-                <td>{{ tb.bracket.second_fighter && `${tb.bracket.second_fighter.city} -  ${tb.bracket.second_fighter.name}` }}</td>
+                <td>{{ tb.bracket.second_fighter && `${tb.bracket.second_fighter.city} "${tb.bracket.first_fighter.club}" -  ${tb.bracket.second_fighter.name}` }}</td>
               </tr>  
             </template>
             
