@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="theme theme-light" id="tbs">
-        <h1>КИКБОКСИНГ СПОРТ ТУРИ БУЙИЧА 2013-2008 ЙИЛЛАРДА ТУГУЛГАН УГИЛ ВА КИЗ БОЛЛАР УРТАСИДА УЗБЕКИСТОН КУБОГИ</h1>
+        <h1 style="text-transform: uppercase;">Кикбоксинг спорт тури буйича 2001-2007 йилларда тугулган усмирлар, кизлар ва катталар уртасида Узбекистон Кубоги</h1>
         <div class="theme__wrapper" v-if="reversedTbsGroups.length > 0"  style="    display: flex;
     flex-direction: column;
     justify-content: center;
@@ -208,7 +208,7 @@ export default {
   },
   mounted() {
     setInterval(() => {
-            axios.get(`https://wako-api.interactive-labs.ru/api/tournament-bracket-groups/search`, {
+            axios.get(`${process.env.VUE_APP_API}/tournament-bracket-groups/search`, {
                 params: this.$route.params
             })
             .then(({ data }) => {

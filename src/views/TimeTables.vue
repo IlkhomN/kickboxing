@@ -8,6 +8,7 @@
         <h1 style="text-align: center;">{{ $route.params.ring.toUpperCase() }}</h1>
         <table class="time-table">
           <thead>
+            <th>№</th>
             <th>Время</th>
             <th>Бойец</th>
             <th></th>
@@ -20,9 +21,10 @@
               </tr>
               <tr :key="tb.id">
                 <td>{{ i+1 }}</td>
-                <td>{{ tb.bracket.second_fighter && `${tb.bracket.second_fighter.country.name} -  ${tb.bracket.second_fighter.name}` }}</td>
+                <td>{{ tb.start_at }}</td>
+                <td>{{ tb.bracket.first_fighter && `${tb.bracket.first_fighter.city} -  ${tb.bracket.first_fighter.name}` }}</td>
                 <td>vs</td>
-                <td>{{ tb.bracket.first_fighter && `${tb.bracket.first_fighter.country.name} -  ${tb.bracket.first_fighter.name}` }}</td>
+                <td>{{ tb.bracket.second_fighter && `${tb.bracket.second_fighter.city} -  ${tb.bracket.second_fighter.name}` }}</td>
               </tr>  
             </template>
             
@@ -37,6 +39,7 @@
 <script>
 import axios from 'axios'
 import moment from 'moment'
+import '../assets/admin/style.css'
 
 export default {
   data() {
@@ -47,7 +50,7 @@ export default {
   },
   methods: {
     timetable() {
-      axios.get(`https://wako-api.interactive-labs.ru/api/time-tables/${this.$route.params.ring}`)
+      axios.get(`${process.env.VUE_APP_API}/time-tables/${this.$route.params.ring}`)
         .then(({ data }) => {
             this.timetables = data
         })
@@ -122,14 +125,14 @@ body {
     // background-color: #034344;
     padding: 10px 20px;
     border-radius: 5px;
-    color: #fff;
+    color: #000;
     margin-bottom: 10px;
   }
   tr {
     // background-color: #0F8B8D;
     padding: 10px 20px;
     border-radius: 5px;
-    color: #fff;
+    color: #000;
     margin-bottom: 10px;
     &.header {
       // background-color: #005e5f;
@@ -146,6 +149,7 @@ body {
     font-weight: 600;
     // font-size: 20px;
     font-family: sans-serif;
+    color: #000;
   }
 }
 
