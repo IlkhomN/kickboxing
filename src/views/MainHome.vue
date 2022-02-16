@@ -201,7 +201,16 @@
       <h1>Расписание</h1>
       <div class="tts_wrapper">
         <router-link target="_blank" :to="{ name: 'time-tables', params: { ring: 'tatami-1' } }">
-          <h2>Татами</h2>
+          <h2>Татами A</h2>
+        </router-link>
+        <router-link target="_blank" :to="{ name: 'time-tables', params: { ring: 'tatami-2' } }">
+          <h2>Татами B</h2>
+        </router-link>
+        <router-link target="_blank" :to="{ name: 'time-tables', params: { ring: 'tatami-3' } }">
+          <h2>Татами C</h2>
+        </router-link>
+        <router-link target="_blank" :to="{ name: 'time-tables', params: { ring: 'tatami-4' } }">
+          <h2>Татами D</h2>
         </router-link>
         <router-link target="_blank" :to="{ name: 'time-tables', params: { ring: 'ring-1' } }">
           <h2>Ринг</h2>
@@ -266,25 +275,20 @@ export default {
                     title: 'Возрастная группа',
                     variants: [
                         {
-                        title: 'Juniors (9-10)',
-                        value: 'juniors'
+                        title: 'Children (7-9)',
+                        value: 'children'
+                        },                        {
+                        title: 'Younger cadets (10-12)',
+                        value: 'younger-cadets'
                         },
                         {
-                        title: 'Younger Juniors (11-12)',
-                        value: 'younger-juniors'
-                        },
-                        {
-                        title: 'Older Juniors (13-14)',
-                        value: 'older-juniors'
-                        },
-                        {
-                        title: 'Seniors (15-16)',
+                        title: 'Seniors (18-45)',
                         value: 'seniors'
                         },
                     ]
                     }
                 } else if (this.step === 3) {
-                    if (['juniors'].includes(this.selected.age)) {
+                    if (['children'].includes(this.selected.age)) {
                     return {
                         title: 'Направление',
                         variants: [
@@ -292,9 +296,13 @@ export default {
                             title: 'Kick Light',
                             value: 'kick-light'
                         },
+                        {
+                            title: 'Light contact',
+                            value: 'light-contact'
+                        },
                         ]
                     }
-                    } else if (['younger-juniors'].includes(this.selected.age)) {
+                    } else if (['younger-cadets'].includes(this.selected.age)) {
                     return {
                         title: 'Направление',
                         variants: [
@@ -302,15 +310,9 @@ export default {
                             title: 'Kick Light',
                             value: 'kick-light'
                         },
-                        ]
-                    }
-                    }else if (['seniors'].includes(this.selected.age)) {
-                    return {
-                        title: 'Направление',
-                        variants: [
                         {
-                            title: 'Low Kick',
-                            value: 'low-kick'
+                            title: 'Light contact',
+                            value: 'light-contact'
                         },
                         ]
                     }
@@ -319,133 +321,29 @@ export default {
                         title: 'Направление',
                         variants: [
                         {
-                            title: 'Low-Kick',
-                            value: 'low-kick'
+                            title: 'Full contact',
+                            value: 'full-contact'
+                        },
+                        {
+                            title: 'K-1',
+                            value: 'k-1'
                         },
                         ]
                     }
                     }
                 } else if (this.step === 4) {
-                    if (this.selected.age === 'younger-cadets') {
+                    if (this.selected.age === 'children') {
                     if (this.selected.sex === 'male') {
                         return {
                         title: 'Весовая категория',
                         variants: [
                             {
-                            title: 'до 22',
-                            value: '-22'
+                            title: 'до 18',
+                            value: '-18'
                             },{
-                            title: 'до 25',
-                            value: '-25'
+                            title: 'до 21',
+                            value: '-21'
                             },
-                            {
-                            title: 'до 27',
-                            value: '-27'
-                            },
-                            {
-                            title: 'до 29',
-                            value: '-29'
-                            },
-                            {
-                            title: 'до 31',
-                            value: '-31'
-                            },
-                            {
-                            title: 'до 33',
-                            value: '-33'
-                            },
-                            {
-                            title: 'до 35',
-                            value: '-35'
-                            },
-                            {
-                            title: 'до 37',
-                            value: '-37'
-                            },
-                            {
-                            title: 'до 40',
-                            value: '-40'
-                            },
-                            {
-                            title: 'до 43',
-                            value: '-43'
-                            },
-                            {
-                            title: 'от 43',
-                            value: '43'
-                            },
-                        ]
-                        }
-                    } else {
-                        return {
-                        title: 'Весовая категория',
-                        variants: [
-                            {
-                            title: 'до 24',
-                            value: '-24'
-                            },
-                            {
-                            title: 'до 27',
-                            value: '-27'
-                            },
-                            {
-                            title: 'до 33',
-                            value: '-33'
-                            },
-                        ]
-                        }
-                    }
-                    } else if (this.selected.age === 'older-cadets') {
-                    if (this.selected.sex === 'male') {
-                        return {
-                        title: 'Весовая категория',
-                        variants: [
-                            {
-                            title: 'до 30',
-                            value: '-30'
-                            },
-                            {
-                            title: 'до 32',
-                            value: '-32'
-                            },
-                            {
-                            title: 'до 34',
-                            value: '-34'
-                            },
-                            {
-                            title: 'до 36',
-                            value: '-36'
-                            },
-                            {
-                            title: 'до 38',
-                            value: '-38'
-                            },
-                            {
-                            title: 'до 40',
-                            value: '-40'
-                            },
-                            {
-                            title: 'до 42',
-                            value: '-42'
-                            },
-                            {
-                            title: 'до 44',
-                            value: '-44'
-                            },
-                            {
-                            title: 'до 46',
-                            value: '-46'
-                            },
-                            {
-                            title: 'от 46',
-                            value: '46'
-                            },
-                        ]
-                        }
-                    } else {
-                        return {
-                        title: 'Весовая категория',
-                        variants: [
                             {
                             title: 'до 24',
                             value: '-24'
@@ -466,281 +364,163 @@ export default {
                             title: 'до 36',
                             value: '-36'
                             },
+                            
+                            {
+                            title: 'от 36',
+                            value: '36'
+                            },
                         ]
                         }
-                    }
-                    } else if (this.selected.age === 'juniors') {
-                    if (this.selected.sex === 'male') {
+                    } else {
                         return {
                         title: 'Весовая категория',
                         variants: [
                             {
-                            title: 'до 22',
-                            value: '-22'
+                            title: 'до 18',
+                            value: '-18'
                             },{
-                            title: 'до 25',
-                            value: '-25'
+                            title: 'до 21',
+                            value: '-21'
+                            },
+                            {
+                            title: 'до 24',
+                            value: '-24'
                             },
                             {
                             title: 'до 27',
                             value: '-27'
                             },
                             {
-                            title: 'до 29',
-                            value: '-29'
-                            },
-                            {
-                            title: 'до 31',
-                            value: '-31'
-                            },
-                            {
-                            title: 'до 33',
-                            value: '-33'
-                            },
-                            {
-                            title: 'до 35',
-                            value: '-35'
-                            },
-                            {
-                            title: 'до 37',
-                            value: '-37'
-                            },
-                            {
-                            title: 'до 40',
-                            value: '-40'
-                            },
-                            {
-                            title: 'до 43',
-                            value: '-43'
-                            },
-                            {
-                            title: 'от 43',
-                            value: '43'
-                            },
-                        ]
-                        }
-                    } else {
-                        return {
-                        title: 'Весовая категория',
-                        variants: [
-                            {
-                            title: 'до 33',
-                            value: '-33'
-                            },
-                            {
-                            title: 'до 38',
-                            value: '-38'
-                            },
-                            {
-                            title: 'до 42',
-                            value: '-42'
-                            },
-                            {
-                            title: 'от 47',
-                            value: '47'
-                            },
-                        ]
-                        }
-                    }
-                    } else if (this.selected.age === 'younger-juniors') {
-                    if (this.selected.sex === 'male') {
-                        return {
-                        title: 'Весовая категория',
-                        variants: [
-                            {
                             title: 'до 30',
                             value: '-30'
                             },
                             {
-                            title: 'до 32',
-                            value: '-32'
-                            },
-                            {
-                            title: 'до 34',
-                            value: '-34'
+                            title: 'до 33',
+                            value: '-33'
                             },
                             {
                             title: 'до 36',
                             value: '-36'
                             },
+                            
                             {
-                            title: 'до 38',
-                            value: '-38'
-                            },
-                            {
-                            title: 'до 40',
-                            value: '-40'
-                            },
-                            {
-                            title: 'до 42',
-                            value: '-42'
-                            },
-                            {
-                            title: 'до 44',
-                            value: '-44'
-                            },
-                            {
-                            title: 'до 46',
-                            value: '-46'
-                            },
-                            {
-                            title: 'от 46',
-                            value: '46'
-                            },
-                        ]
-                        }
-                    } else {
-                        return {
-                        title: 'Весовая категория',
-                        variants: [
-                            {
-                            title: 'до 42',
-                            value: '-42'
-                            },
-                            {
-                            title: 'до 47',
-                            value: '-47'
-                            },
-                            {
-                            title: 'до 52',
-                            value: '-52'
-                            },
-                            {
-                            title: 'от 57',
-                            value: '57'
+                            title: 'от 36',
+                            value: '36'
                             },
                         ]
                         }
                     }
-                    } else if (this.selected.age === 'older-juniors') {
-                    if (this.selected.sex === 'male') {
-                        return {
-                        title: 'Весовая категория',
-                        variants: [
-                            {
-                            title: 'до 35',
-                            value: '-35'
-                            },
-                            {
-                            title: 'до 37',
-                            value: '-37'
-                            },
-                            {
-                            title: 'до 39',
-                            value: '-39'
-                            },
-                            {
-                            title: 'до 41',
-                            value: '-41'
-                            },
-                            {
-                            title: 'до 43',
-                            value: '-43'
-                            },
-                            {
-                            title: 'до 45',
-                            value: '-45'
-                            },
-                            {
-                            title: 'до 47',
-                            value: '-47'
-                            },
-                            {
-                            title: 'до 49',
-                            value: '-49'
-                            },
-                            {
-                            title: 'до 51',
-                            value: '-51'
-                            },
-                            {
-                            title: 'до 54',
-                            value: '-54'
-                            },
-                            {
-                            title: 'до 57',
-                            value: '-57'
-                            },
-                            {
-                            title: 'от 57',
-                            value: '57'
-                            },
-                        ]
+                    } else if (this.selected.age === 'younger-cadets') {
+                        if (this.selected.sex === 'male') {
+                            return {
+                            title: 'Весовая категория',
+                            variants: [
+                                {
+                                title: 'до 28',
+                                value: '-28'
+                                },{
+                                title: 'до 32',
+                                value: '-32'
+                                },
+                                {
+                                title: 'до 37',
+                                value: '-37'
+                                },
+                                {
+                                title: 'до 42',
+                                value: '-42'
+                                },
+                                {
+                                title: 'до 47',
+                                value: '-47'
+                                },
+                                {
+                                title: 'от 47',
+                                value: '47'
+                                },
+                            ]
+                            }
+                        } else {
+                            return {
+                            title: 'Весовая категория',
+                            variants: [
+                                {
+                                title: 'до 28',
+                                value: '-28'
+                                },{
+                                title: 'до 32',
+                                value: '-32'
+                                },
+                                {
+                                title: 'до 37',
+                                value: '-37'
+                                },
+                                {
+                                title: 'до 42',
+                                value: '-42'
+                                },
+                                {
+                                title: 'до 47',
+                                value: '-47'
+                                },
+                                {
+                                title: 'от 47',
+                                value: '47'
+                                },
+                            ]
+                            }
                         }
-                    } else {
-                        return {
-                        title: 'Весовая категория',
-                        variants: [
-                            {
-                            title: 'до 48',
-                            value: '-48'
-                            },
-                            {
-                            title: 'до 52',
-                            value: '-52'
-                            },
-                            {
-                            title: 'до 57',
-                            value: '-57'
-                            },
-                            {
-                            title: 'до 62',
-                            value: '-62'
-                            },
-                        ]
-                        }
-                    }
                     } else if (this.selected.age === 'seniors') {
                     if (this.selected.sex === 'male') {
                         return {
                         title: 'Весовая категория',
                         variants: [
                             {
-                            title: 'до 40',
-                            value: '-40'
+                            title: 'до 52.7',
+                            value: '-52.7'
                             },{
-                            title: 'до 42',
-                            value: '-42'
-                            },
-                            {
-                            title: 'до 45',
-                            value: '-45'
-                            },
-                            {
-                            title: 'до 48',
-                            value: '-48'
-                            },
-                            {
-                            title: 'до 51',
-                            value: '-51'
-                            },
-                            {
-                            title: 'до 54',
-                            value: '-54'
-                            },
-                            {
-                            title: 'до 57',
-                            value: '-57'
+                            title: 'до 56.4',
+                            value: '-56.4'
                             },
                             {
                             title: 'до 60',
                             value: '-60'
                             },
                             {
-                            title: 'до 63.5',
-                            value: '-63.5'
+                            title: 'до 64.5',
+                            value: '-64.5'
                             },
                             {
-                            title: 'до 67',
-                            value: '-67'
+                            title: 'до 66.8',
+                            value: '-66.8'
                             },
                             {
-                            title: 'до 71',
-                            value: '-71'
+                            title: 'до 71.8',
+                            value: '-71.8'
                             },
                             {
-                            title: 'от 71',
-                            value: '71'
+                            title: 'до 75',
+                            value: '-75'
+                            },
+                            {
+                            title: 'до 81.4',
+                            value: '-81.4'
+                            },
+                            {
+                            title: 'до 85',
+                            value: '-85'
+                            },
+                            {
+                            title: 'до 88.6',
+                            value: '-88.6'
+                            },
+                            {
+                            title: 'до 94.1',
+                            value: '-94.1'
+                            },
+                            {
+                            title: 'от 94.1',
+                            value: '94.1'
                             },
                         ]
                         }
@@ -749,20 +529,12 @@ export default {
                         title: 'Весовая категория',
                         variants: [
                             {
-                            title: 'до 52',
-                            value: '-52'
+                            title: 'до 55',
+                            value: '-55'
                             },
                             {
-                            title: 'до 57',
-                            value: '-57'
-                            },
-                            {
-                            title: 'до 62',
-                            value: '-62'
-                            },
-                            {
-                            title: 'от 67',
-                            value: '67'
+                            title: 'до 63',
+                            value: '-63'
                             },
                         ]
                         }
