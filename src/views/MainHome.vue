@@ -91,8 +91,9 @@
                 </span>
                 <span class="name">
                   {{ tb.first_fighter && tb.first_fighter.name || 'Отсутствует' }}
-                  - {{ tb.first_fighter && tb.first_fighter.city }}
+                  
                 </span>
+                <span class="city">- {{ tb.first_fighter && tb.first_fighter.city }}</span>
                 <span class="score">{{ tb.first_fighter && tb.first_fighter.age }}</span>
               </div>
               <div class="match-bottom team">
@@ -111,8 +112,9 @@
                   class="name"
                 >
                   {{ tb.second_fighter && tb.second_fighter.name || 'Отсутствует' }}
-                  - {{ tb.second_fighter && tb.second_fighter.city }}
+                  
                 </span>
+                <span class="city">- {{ tb.second_fighter && tb.second_fighter.city }}</span>
                 <span class="score">{{ tb.second_fighter && tb.second_fighter.age }}</span>
               </div>
               <div class="match-lines">
@@ -709,5 +711,19 @@ h2 {
       color: #143642;
     }
   }
+}
+.match .team span {
+    display: inline-block;
+    max-width: 170px;
+    overflow: hidden;
+}
+
+.match .team span.city {
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.match .team span.seed {
+    display: none;
 }
 </style>
